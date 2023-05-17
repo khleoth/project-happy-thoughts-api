@@ -77,9 +77,9 @@ app.post("/thoughts", async (req, res)=>{
 
  // modify when nothing found
 app.patch("/thoughts/:_id/like", async (req, res) => {
-  const { _id } = req.params;
+  const { id } = req.params;
   try {
-    const likedThought = await Thought.findByIdAndUpdate(_id, {
+    const likedThought = await Thought.findByIdAndUpdate(id, {
       $inc: { heart: 1}
     });
     res.status(200).json({
