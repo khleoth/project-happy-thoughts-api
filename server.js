@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/project-happy-thought-api";
-//https://project-happy-thoughts-api-milw6er7zq-lz.a.run.app
+
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -79,9 +79,7 @@ app.post("/thoughts", async (req, res)=>{
 app.patch("/thoughts/:_id/like", async (req, res) => {
   const { _id } = req.params;
   try {
-    const likedThought = await Thought.findByIdAndUpdate(_id, {
-      $inc: { heart: 1},
-    });
+    const likedThought = await Thought.findByIdAndUpdate(id, {$inc: {hearts: 1}}, {new: true})
     res.status(200).json({
       success: true,
       response: likedThought,
