@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Hello! This API is handling requests from happythoughtsleot.netlify.app feel free to check out that link for the front end");
 });
 
 const { Schema } = mongoose;
@@ -76,7 +76,7 @@ app.post("/thoughts", async (req, res)=>{
 });
 
  // modify when nothing found
-app.patch("/thoughts/:_id/like", async (req, res) => {
+app.patch("/thoughts/:id/like", async (req, res) => {
   const { id } = req.params;
   try {
     const likedThought = await Thought.findByIdAndUpdate(id, {
@@ -95,31 +95,6 @@ app.patch("/thoughts/:_id/like", async (req, res) => {
      });
   }
 });
-
-// POST - create something
-// PATCH - update
-// PUT - replace
-
-// delete
-// https://stackoverflow.com/questions/54081114/what-is-the-difference-between-findbyidandremove-and-findbyidanddelete-in-mongoo
-/* app.delete("/thoughts/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    // const thoughtItem = await Thought.findByIdAndDelete(id);
-    const thoughtItem = await Thought.findByIdAndRemove(id);
-    res.status(200).json({
-      success: true,
-      response: thoughtItem,
-      message: "deleted successfully"
-     });
-  } catch(e) {
-    res.status(400).json({
-      success: false,
-      response: e,
-      message: "did not successfully delete"
-     });
-  }
-}); */
 
 // Start the server
 app.listen(port, () => {
